@@ -1359,7 +1359,7 @@ int I_CheckControllerPak(void)
 	dirent_t *de;
 
 	d = fs_open(get_vmu_fn(vmudev, NULL), O_RDONLY | O_DIR);
-	if(!d)
+	if(-1 == d)
 		return PFS_ERR_ID_FATAL;
 
 	Pak_Memory = 200;
@@ -1422,7 +1422,7 @@ int I_SavePakSettings(doom64_settings_t *msettings)
 		return PFS_ERR_NOPACK;
 
 	file_t d = fs_open(get_vmu_fn(vmudev, "doom64stg"), O_WRONLY | O_CREAT | O_META);
-	if (!d)
+	if (-1 == d)
 		return PFS_ERR_ID_FATAL;
 
 	memset(&pkg, 0, sizeof(vmu_pkg_t));
@@ -1481,7 +1481,7 @@ int I_SavePakFile(void)
 		return PFS_ERR_NOPACK;
 
 	file_t d = fs_open(get_vmu_fn(vmudev, "doom64"), O_WRONLY | O_META);
-	if (!d)
+	if (-1 == d)
 		return PFS_ERR_ID_FATAL;
 
 	memset(&pkg, 0, sizeof(vmu_pkg_t));
@@ -1544,7 +1544,7 @@ int I_ReadPakSettings(doom64_settings_t *msettings)
 		return PFS_ERR_NOPACK;
 
 	file_t d = fs_open(get_vmu_fn(vmudev, "doom64stg"), O_RDONLY | O_META);
-	if (!d)
+	if (-1 == d)
 		return PFS_ERR_ID_FATAL;
 
 	size = fs_total(d);
@@ -1626,7 +1626,7 @@ int I_ReadPakFile(void)
 	Pak_Size = 0;
 
 	file_t d = fs_open(get_vmu_fn(vmudev, "doom64"), O_RDONLY | O_META);
-	if (!d)
+	if (-1 == d)
 		return PFS_ERR_ID_FATAL;
 
 	size = fs_total(d);
@@ -1703,7 +1703,7 @@ int I_CreatePakFile(void)
 	pkg.data = Pak_Data;
 
 	file_t d = fs_open(get_vmu_fn(vmudev, "doom64"), O_RDWR | O_CREAT | O_META);
-	if (!d)
+	if (-1 == d)
 		return PFS_ERR_ID_FATAL;
 
 	vmu_pkg_build(&pkg, &pkg_out, &pkg_size);
