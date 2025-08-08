@@ -1,4 +1,5 @@
 .vscode/
+.DS_Store
 dcload-ip
 dcload-ip/
 src/.vscode/
