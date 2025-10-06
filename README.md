@@ -1,6 +1,6 @@
-# Doom 64 for Dreamcast (updated 2025/07/30) #
+# Doom 64 for Dreamcast (updated 2025/10/05) #
 
-Important note: Doom 64 finally works and is stable when built against recent-ish KOS `master`.
+Important note: Doom 64 finally works and is stable when built against KOS v2.2.1.
 
 **Please pay close attention to the README as significant new features have been added and the build instructions have changed.**
 
@@ -90,7 +90,7 @@ See [ https://dreamcast.wiki/Getting_Started_with_Dreamcast_development ] for in
 
 *NOTE: FOR BEST RESULTS, PLEASE USE THE `environ.sh` FILE PROVIDED IN THE `doom64-dc` REPO.*
 
-Doom 64 can be built using an unmodified copy of KOS cloned directly from the official repo. I have tested it with `master` as of 2025/05/04 (commit `2762cef`). I suggest using that specific commit id.
+Doom 64 can be built using an unmodified copy of KOS cloned directly from the official repo. Use the `v2.2.1` tag version of KOS.
 
 If you are going to file a Github issue, make sure you are using that version to test your problem.
 
