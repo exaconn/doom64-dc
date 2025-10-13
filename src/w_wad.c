@@ -1017,7 +1017,12 @@ int W_CheckNumForName(char *name)
 	void *ret_node;
 	lumpinfo_t *retlump;
 
-	strncpy(testlump.name, name, 8);
+	// -Werror not very happy with this :-D
+	// strncpy(testlump.name, name, 8);
+	size_t copylen = strlen(name);
+	if (copylen > 8) copylen = 8;
+	memset(testlump.name, 0, 8);
+	memcpy(testlump.name, name, copylen);
 
 	retlump = (lumpinfo_t *)is_in_hashtable(&ht, &testlump, &ret_node);
 
@@ -1184,7 +1189,12 @@ int W_S2_CheckNumForName(char *name)
 	void *ret_node;
 	lumpinfo_t *retlump;
 
-	strncpy(testlump.name, name, 8);
+	// -Werror not very happy with this :-D
+	// strncpy(testlump.name, name, 8);
+	size_t copylen = strlen(name);
+	if (copylen > 8) copylen = 8;
+	memset(testlump.name, 0, 8);
+	memcpy(testlump.name, name, copylen);
 
 	retlump = (lumpinfo_t *)is_in_hashtable(&altht, &testlump, &ret_node);
 

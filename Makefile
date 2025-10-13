@@ -33,11 +33,15 @@ C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(file:.c=.o))
 
-#-ggdb3
-#CFLAGS = -DDCLOCALDEV -Wall -Werror -Wno-implicit-fallthrough -DOSDSHOWFPS -Wformat=2
+CFLAGS = -Wno-deprecated-declarations -Wall -Wno-implicit-fallthrough -Wformat=2
+# everyone asks "HoW dO i GeT fPs On ScReEn???"
+#CFLAGS += -DDCLOCALDEV -DOSDSHOWFPS
 
-#
-#-fanalyzer -Wextra
+# if you want to help clean up the code on new compiler versions, here you go 
+#CFLAGS += -Wextra -Werror
+
+# I've deal with most of the true positives from this analysis already
+#CFLAGS += -fanalyzer
 
 # tools
 PRINT = printf

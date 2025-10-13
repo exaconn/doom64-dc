@@ -343,7 +343,7 @@ static void tnl_poly(int list, d64Poly_t *p)
 
 	if (verts_to_process == 4)
 		p->dVerts[2].v->flags = PVR_CMD_VERTEX;
-	else
+	else 
 		p->dVerts[2].v->flags = PVR_CMD_VERTEX_EOL;
 
 	verts_to_process = clip_poly(p, p_vismask);
@@ -484,7 +484,6 @@ unsigned __attribute__((noinline)) clip_poly(d64Poly_t *p, unsigned p_vismask)
 
 	// tri all visible
 	case 7:
-		;
 
 		break;
 
@@ -630,7 +629,6 @@ unsigned __attribute__((noinline)) clip_poly(d64Poly_t *p, unsigned p_vismask)
 
 	// quad all visible
 	case 31:
-		;
 
 		break;
 

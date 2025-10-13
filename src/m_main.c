@@ -2091,7 +2091,7 @@ void M_DrawBackground(d64_bg_enum_t bg, int alpha)
 	short *palsrc;
 	float u1, v1, u2, v2;
 	float x1, y1, x2, y2;
-	float z;
+	float z = 0.00015f;
 	uint8_t a1 = alpha & 0xff;
 	int x = d64_bg[bg].x;
 	int y = d64_bg[bg].y;

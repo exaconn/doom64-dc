@@ -177,13 +177,12 @@ extern int context_change;
 
 extern unsigned char lightcurve[256];
 extern unsigned char lightmax[256];
-#define get_color_argb1555(rrr, ggg, bbb, aaa)						\
-	((uint16_t)(((aaa & 1) << 15) | (((rrr >> 3) & 0x1f) << 10) |	\
-		    (((ggg >> 3) & 0x1f) << 5) | ((bbb >> 3) & 0x1f)))
 
-// rrggbbaa
-// color>>8 == xxrrggbb & 0x00ffffff == 00rrggbb
-// | col
+// this was originally doing (((aaa)&1)<<15) to set the alpha bit
+// that isn't right especially not when I was setting palette entries for intensity textures
+#define get_color_argb1555(rrr, ggg, bbb, aaa)						\
+	((uint16_t)(((!!aaa) << 15) | (((rrr >> 3) & 0x1f) << 10) |	\
+		    (((ggg >> 3) & 0x1f) << 5) | ((bbb >> 3) & 0x1f)))
 
 #define LOSTLEVEL 34
 #define KNEEDEEP 41
@@ -206,7 +205,7 @@ typedef enum {
 	NUM_BG
 } d64_bg_enum_t;
 
-// twiddling stuff copied from whatever filed copied it from kmgenc.c
+// twiddling stuff copied from whatever file which copied it from kmgenc.c
 #define TWIDTAB(x)													\
 	((x & 1) | ((x & 2) << 1) | ((x & 4) << 2) | ((x & 8) << 3) |	\
 	 ((x & 16) << 4) | ((x & 32) << 5) | ((x & 64) << 6) |			\
@@ -253,32 +252,6 @@ extern int32_t Pak_Memory;
 extern uint8_t *Pak_Data;
 
 typedef struct subsector_s subsector_t;
-
-typedef struct r_wall_s {
-	int flags;
-	int texture;
-	int topHeight;
-	int bottomHeight;
-	int topOffset;
-	int bottomOffset;
-	int topColor;
-	int bottomColor;
-} 
-r_wall_t;
-
-/* int numverts, int zpos, int texture,
-	int xpos, int ypos, int color, int ceiling, int lightlevel, int alpha */
-
-typedef struct r_plane_s {
-	int numverts;
-	int zpos;
-	int texture;
-	int xpos;
-	int ypos;
-	int color;
-	int lightlevel;
-	int alpha;
-} r_plane_t;
 
 typedef struct {
 	// 0
