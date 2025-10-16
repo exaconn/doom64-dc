@@ -88,13 +88,13 @@ You will need a host/native GCC install and a full working Dreamcast/KallistiOS 
 
 See [ https://dreamcast.wiki/Getting_Started_with_Dreamcast_development ] for instructions.
 
-*NOTE: FOR BEST RESULTS, PLEASE USE THE `environ.sh` FILE PROVIDED IN THE `doom64-dc` REPO.*
-
 Doom 64 can be built using an unmodified copy of KOS cloned directly from the official repo. Use the `v2.2.1` tag version of KOS.
 
 If you are going to file a Github issue, make sure you are using that version to test your problem.
 
 Please follow the instructions for building KOS found in the wiki: [ https://dreamcast.wiki/Getting_Started_with_Dreamcast_development#Configuring_and_compiling_KOS_and_kos-ports ].
+
+For best results, modify the `environ.sh` before building KOS to use `-O3` and `-flto=auto`.
 
 **How to generate Doom 64 disc image**
 
