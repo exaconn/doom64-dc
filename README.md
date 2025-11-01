@@ -1,5 +1,7 @@
 # Doom 64 for Dreamcast (updated 2025/10/05) #
 
+Do not open an issue for emulator-related problems. I close them without reading.
+
 Important note: Doom 64 finally works and is stable when built against KOS v2.2.1.
 
 **Please pay close attention to the README as significant new features have been added and the build instructions have changed.**
