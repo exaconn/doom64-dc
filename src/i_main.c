@@ -498,48 +498,45 @@ void I_RumbleThread(void *param)
 int rumble_patterns[NUM_RUMBLE];
 
 static int striker_rumble_patterns[NUM_RUMBLE] = {
-	0x23084000,
-	0x3339F010,
-	0x23083000,
-	0x0f082000,
-	0x23083000,
-	0x04004001,
-	0x04007001,
-	0x03003001,
-	0x0f082000,
-	0x19083000,
-	0x1e085000,
-	0x0a082000,
-	0x05001001,
-	0x23083000,
-	0x3339c010,
+    0x00084010,
+    0x00097010,
+    0x00083010,
+    0x00082010,
+    0x00083010,
+    0x00084010,
+    0x00087010,
+    0x00083010,
+    0x00082010,
+    0x00083010,
+    0x00085010,
+    0x00082010,
+    0x00081010,
+    0x00083010,
+    0x00097010,
 };
 
 int I_GetDamageRumble(int damage)
 {
-	switch (menu_settings.Rumble) {
-	case (int)rumblepak_off:
-		return 0;
-	case (int)rumblepak_strikerdc:
-		rumble_fields_t fields = {.raw = 0x021A7009};
+    switch (menu_settings.Rumble) {
+    case (int)rumblepak_off:
+        return 0;
+    case (int)rumblepak_strikerdc:
+        uint32_t fields;
+        
+        if (damage >= 50) {
+            fields = 0x00087010;
+        } else if (damage >= 40) {
+            fields = 0x00085010;
+        } else if (damage >= 15) {
+            fields = 0x00083010;
+        } else {
+            fields = 0x00082010;
+        }
 
-		int rumbledamage;
-		if (damage > 50)
-			rumbledamage = 7;
-		else
-			rumbledamage = 7 * damage / 50;
-
-		fields.fx1_intensity = rumbledamage;
-		fields.fx2_lintensity = 0;
-		fields.fx2_uintensity = 0;
-		fields.fx2_pulse = damage < 25;
-		fields.special_pulse = damage > 40;
-		fields.duration = damage;
-
-		return fields.raw;
-	default:
-		return 0;
-	}
+        return fields;
+    default:
+        return 0;
+    }
 }
 
 void I_InitRumble(i_rumble_pak_t rumblepak)
@@ -564,7 +561,6 @@ void I_Rumble(uint32_t packet)
 		thd_worker_wakeup(rumble_worker_thread);
 	}
 }
-
 
 void I_Init(void)
 {
