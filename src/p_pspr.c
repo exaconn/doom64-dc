@@ -19,6 +19,7 @@
 #define LASERDISTANCE (30)
 
 int plasma_loop_channel = -1;
+int fire_counter = 0;
 
 extern void P_Thrust(player_t *player, angle_t angle, fixed_t move);
 extern int ArtifactLookupTable[8];
@@ -537,6 +538,7 @@ void A_WeaponReady(player_t *player, pspdef_t *psp) // 8001B83C
 	/* */
 	/* the missile launcher and bfg do not auto fire */
 	if (ticbuttons[0] & BT_DATA[0]->BT_ATTACK) {
+		fire_counter = 0;
 		P_FireWeapon(player);
 		return;
 	}
@@ -979,7 +981,11 @@ void A_FirePlasma(player_t *player, pspdef_t *psp) // 8001BF2C
 			fields.duration = 3;
 			dbgio_printf("a_fireplasma %08lx\n", fields.raw);
 			purupuru_rumble_raw(purudev, fields.raw); */
-		I_Rumble(rumble_patterns[rumble_plasma]);
+		//I_Rumble(rumble_patterns[rumble_plasma]);
+		if (fire_counter % 2 == 0) {
+            I_Rumble(rumble_patterns[rumble_plasma]);
+        }
+        fire_counter++;
 	}
 }
 
@@ -1267,7 +1273,11 @@ void A_FireCGun(player_t *player, pspdef_t *psp) // 8001C3F8
 			fields.duration = 10;
 			dbgio_printf("a_firecgun %08lx\n", fields.raw);
 			purupuru_rumble_raw(purudev, fields.raw); */
-		I_Rumble(rumble_patterns[rumble_cgun]);
+		//I_Rumble(rumble_patterns[rumble_cgun]);
+		if (fire_counter % 2 == 0) {
+            I_Rumble(rumble_patterns[rumble_cgun]);
+        }
+        fire_counter++;
 	}
 }
 
