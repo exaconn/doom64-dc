@@ -133,7 +133,7 @@ export KOS_CFLAGS="${KOS_CFLAGS} -DNDEBUG"
 # NOTE: For our target, -O4 is a valid optimization level that has
 # been seen to have some performance impact as well.
 #
-export KOS_CFLAGS="${KOS_CFLAGS} -O3 -flto=auto"
+export KOS_CFLAGS="${KOS_CFLAGS} -O2"
 
 # Additional Optimizations
 #
@@ -171,7 +171,7 @@ export KOS_CFLAGS="${KOS_CFLAGS} -fomit-frame-pointer"
 # The downside of this is that it COULD interfere with Newlib or KOS implementations
 # of these functions, and it has not been tested thoroughly to ensure compatibility.
 #
-#export KOS_CFLAGS="${KOS_CFLAGS} -fno-builtin"
+export KOS_CFLAGS="${KOS_CFLAGS} -fno-builtin"
 
 # Fast Math Instructions
 #
@@ -181,7 +181,7 @@ export KOS_CFLAGS="${KOS_CFLAGS} -fomit-frame-pointer"
 # however, they do so at the price of accuracy and are not IEEE compliant.
 # NOTE: Enabling this option will also override -fno-builtin!
 #
-export KOS_CFLAGS="${KOS_CFLAGS} -fbuiltin -ffast-math -ffp-contract=fast -mfsrra -mfsca"
+export KOS_CFLAGS="${KOS_CFLAGS} -fbuiltin -ffast-math -ffp-contract=fast"
 
 # SH4 Floating Point Arithmetic Precision
 #
@@ -195,7 +195,7 @@ export KOS_CFLAGS="${KOS_CFLAGS} -fbuiltin -ffast-math -ffp-contract=fast -mfsrr
 # NOTE: Altering this setting also requires your toolchain to have been built
 #       with support for these modes, which is not the case by default!
 #
-export KOS_SH4_PRECISION="-m4-single-only"
+export KOS_SH4_PRECISION="-m4-single"
 
 # Use LRA (Local Register Allocator) Pass
 #
