@@ -495,9 +495,7 @@ void I_RumbleThread(void *param)
 	}
 }
 
-int rumble_patterns[NUM_RUMBLE];
-
-static int striker_rumble_patterns[NUM_RUMBLE] = {
+const uint32_t rumble_patterns[NUM_RUMBLE] = {
     0x00084010,
     0x00097010,
     0x00083010,
@@ -517,10 +515,7 @@ static int striker_rumble_patterns[NUM_RUMBLE] = {
 
 int I_GetDamageRumble(int damage)
 {
-    switch (menu_settings.Rumble) {
-    case (int)rumblepak_off:
-        return 0;
-    case (int)rumblepak_strikerdc:
+	if(menu_settings.Rumble) {
         uint32_t fields;
         
         if (damage >= 50) {
@@ -534,21 +529,10 @@ int I_GetDamageRumble(int damage)
         }
 
         return fields;
+	}
     default:
         return 0;
     }
-}
-
-void I_InitRumble(i_rumble_pak_t rumblepak)
-{
-	switch (rumblepak) {
-		case rumblepak_off:
-			return;
-		case rumblepak_strikerdc:
-			memcpy(rumble_patterns, striker_rumble_patterns, sizeof(rumble_patterns));
-		default:
-			return;
-	}
 }
 
 void I_Rumble(uint32_t packet)
@@ -564,7 +548,7 @@ void I_Rumble(uint32_t packet)
 
 void I_Init(void)
 {
-	I_InitRumble(rumblepak_off);
+	//I_InitRumble(rumblepak_off); // here some init ??
 	rumble_worker_attr.create_detached = 1;
 	rumble_worker_attr.stack_size = 4096;
 	rumble_worker_attr.stack_ptr = NULL;
