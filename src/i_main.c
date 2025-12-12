@@ -491,7 +491,7 @@ void I_RumbleThread(void *param)
 		maple_device_t *purudev = NULL;
 		purudev = maple_enum_type(0, MAPLE_FUNC_PURUPURU);
 		if (purudev)
-				purupuru_rumble_raw(purudev, packet);
+			purupuru_rumble_raw(purudev, packet);
 	}
 }
 
@@ -516,19 +516,19 @@ const uint32_t rumble_patterns[NUM_RUMBLE] = {
 int I_GetDamageRumble(int damage)
 {
 	if(menu_settings.Rumble) {
-        uint32_t fields;
+        uint32_t rumble_pattern;
         
         if (damage >= 50) {
-            fields = 0x00087010;
+            rumble_pattern = 0x00087010;
         } else if (damage >= 40) {
-            fields = 0x00085010;
+            rumble_pattern = 0x00085010;
         } else if (damage >= 15) {
-            fields = 0x00083010;
+            rumble_pattern = 0x00083010;
         } else {
-            fields = 0x00082010;
+            rumble_pattern = 0x00082010;
         }
 
-        return fields;
+        return rumble_pattern;
 	}
     default:
         return 0;
@@ -545,6 +545,20 @@ void I_Rumble(uint32_t packet)
 		thd_worker_wakeup(rumble_worker_thread);
 	}
 }
+
+/*
+void I_InitRumble(i_rumble_pak_t rumblepak)
+{
+	switch (rumblepak) {
+		case rumblepak_off:
+			return;
+		case rumblepak_strikerdc:
+			memcpy(rumble_patterns, striker_rumble_patterns, sizeof(rumble_patterns));
+		default:
+			return;
+	}
+}
+*/
 
 void I_Init(void)
 {
