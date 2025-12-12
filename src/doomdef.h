@@ -61,9 +61,10 @@ typedef enum {
 	NUM_RUMBLE
 } i_rumble_t;
 
-extern int rumble_patterns[NUM_RUMBLE];
+extern uint32_t rumble_patterns[NUM_RUMBLE];
 
-int I_GetDamageRumble(int damage);
+//void I_InitRumble(i_rumble_pak_t rumblepak);
+uint32_t I_GetDamageRumble(int damage);
 void I_Rumble(uint32_t packet);
 
 void I_VMUUpdateFace(uint8_t* image, int force_refresh);
